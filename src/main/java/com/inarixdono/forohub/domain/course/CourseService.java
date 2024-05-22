@@ -15,4 +15,9 @@ public class CourseService {
     public Course createCourse(IncomingCourseDTO course) {
         return repository.save(new Course(course));
     }
+
+    @Transactional
+    public Course findCourseById(Integer id) {
+        return repository.getReferenceById(id);
+    }
 }
