@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inarixdono.forohub.domain.user.User;
-import com.inarixdono.forohub.domain.user.UserDTO;
+import com.inarixdono.forohub.domain.user.IncomingUserDTO;
 import com.inarixdono.forohub.infra.security.JWTDto;
 import com.inarixdono.forohub.infra.security.TokenService;
 
@@ -30,7 +30,7 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<JWTDto> login(@RequestBody @Valid UserDTO user) {
+    public ResponseEntity<JWTDto> login(@RequestBody @Valid IncomingUserDTO user) {
         Authentication token = new UsernamePasswordAuthenticationToken(user.username(), user.password());
         Authentication authenticated = authManager.authenticate(token);
         User userAuthenticated = (User) authenticated.getPrincipal();
