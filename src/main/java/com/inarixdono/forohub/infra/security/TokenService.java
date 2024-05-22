@@ -40,7 +40,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(key); // validando firma
             DecodedJWT verifier = JWT.require(algorithm)
-                    .withIssuer("pkdex")
+                    .withIssuer("forohub")
                     .build()
                     .verify(token);
 
