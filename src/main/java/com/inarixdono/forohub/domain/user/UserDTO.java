@@ -1,7 +1,7 @@
 package com.inarixdono.forohub.domain.user;
 
-import jakarta.validation.constraints.NotBlank;
-
-public record UserDTO(@NotBlank String username, @NotBlank String password) {
-
+public record UserDTO(Integer id, String name, String username) {
+    public UserDTO(User user) {
+        this(user.getId(), user.getName(), user.getUsername());
+    }
 }
