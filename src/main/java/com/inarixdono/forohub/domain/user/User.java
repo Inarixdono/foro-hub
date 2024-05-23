@@ -32,6 +32,12 @@ public class User implements UserDetails {
     private String password;
     private Boolean status = true;
 
+    public User(NewUserDTO user, String password) {
+        this.name = user.name();
+        this.username = user.username();
+        this.password = password;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
