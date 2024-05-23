@@ -9,6 +9,7 @@ import com.inarixdono.forohub.domain.topic.Topic;
 import com.inarixdono.forohub.domain.topic.TopicService;
 import com.inarixdono.forohub.domain.user.User;
 import com.inarixdono.forohub.domain.user.UserService;
+import com.inarixdono.forohub.infra.exception.EntityNotFoundException;
 
 import jakarta.transaction.Transactional;
 
@@ -37,7 +38,7 @@ public class CommentService {
     }
 
     public Comment getComment(Integer id) {
-        return repository.findByIdAndStatusTrue(id).orElseThrow();
+        return repository.findByIdAndStatusTrue(id).orElseThrow(() -> new EntityNotFoundException());
     }
 
     @Transactional

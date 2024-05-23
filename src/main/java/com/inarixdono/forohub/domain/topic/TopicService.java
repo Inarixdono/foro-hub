@@ -9,6 +9,7 @@ import com.inarixdono.forohub.domain.course.Course;
 import com.inarixdono.forohub.domain.course.CourseService;
 import com.inarixdono.forohub.domain.user.User;
 import com.inarixdono.forohub.domain.user.UserService;
+import com.inarixdono.forohub.infra.exception.EntityNotFoundException;
 
 import jakarta.transaction.Transactional;
 
@@ -38,7 +39,7 @@ public class TopicService {
 
     @Transactional
     public Topic getTopic(Integer id) {
-        return repository.findByIdAndStatusTrue(id).orElseThrow();
+        return repository.findByIdAndStatusTrue(id).orElseThrow(() -> new EntityNotFoundException());
     }
 
     @Transactional

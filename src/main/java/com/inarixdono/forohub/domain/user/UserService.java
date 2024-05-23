@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.inarixdono.forohub.infra.exception.EntityNotFoundException;
 import com.inarixdono.forohub.infra.exception.PasswordsDoNotMatchException;
 
 @Service
@@ -25,6 +26,6 @@ public class UserService {
     }
 
     public User getUser(Integer id) {
-        return repository.findByIdAndStatusTrue(id).orElseThrow();
+        return repository.findByIdAndStatusTrue(id).orElseThrow(() -> new EntityNotFoundException());
     }
 }

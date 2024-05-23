@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.inarixdono.forohub.infra.exception.EntityNotFoundException;
+
 import jakarta.transaction.Transactional;
 
 @Service
@@ -25,7 +27,7 @@ public class CourseService {
 
     @Transactional
     public Course getCourse(Integer id) {
-        return repository.findByIdAndStatusTrue(id).orElseThrow();
+        return repository.findByIdAndStatusTrue(id).orElseThrow(() -> new EntityNotFoundException());
     }
 
     @Transactional
