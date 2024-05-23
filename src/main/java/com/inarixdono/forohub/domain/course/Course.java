@@ -32,7 +32,16 @@ public class Course {
         this.category = course.category();
     }
 
-    public void disableCourse() {
+    public void disable() {
         this.status = false;
+    }
+
+    public void update(UpdateCourseDTO courseDTO) {
+        if (courseDTO.name() != null) {
+            this.name = courseDTO.name();
+        }
+        if (courseDTO.category() != null) {
+            this.category = courseDTO.category();
+        }
     }
 }
