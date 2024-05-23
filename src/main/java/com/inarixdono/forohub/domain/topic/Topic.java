@@ -1,7 +1,9 @@
 package com.inarixdono.forohub.domain.topic;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.inarixdono.forohub.domain.comment.Comment;
 import com.inarixdono.forohub.domain.course.Course;
 import com.inarixdono.forohub.domain.user.User;
 
@@ -12,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -38,6 +41,8 @@ public class Topic {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     private Course course;
+    @OneToMany(mappedBy = "topic", fetch = FetchType.LAZY)
+    private List<Comment> comments;
 
     public Topic(IncomingTopicDTO topic, User user, Course course) {
         this.subject = topic.subject();
