@@ -47,13 +47,14 @@ public class TopicController {
         return ResponseEntity.created(uri).body(topicDTO);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<TopicDTO> updateTopic(@PathVariable Integer id, @RequestBody @Valid UpdateTopicDTO topic) {
-        return ResponseEntity.ok(new TopicDTO(service.updateTopic(id, topic)));
+    @PutMapping
+    public ResponseEntity<TopicDTO> updateTopic(@RequestBody @Valid UpdateTopicDTO topic) {
+        return ResponseEntity.ok(new TopicDTO(service.updateTopic(topic)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<TopicDTO> deleteTopic(@PathVariable Integer id) {
-        return ResponseEntity.ok(new TopicDTO(service.deleteTopic(id)));
+        service.deleteTopic(id);
+        return ResponseEntity.noContent().build();
     }
 }
