@@ -41,9 +41,9 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment updateComment(Integer id, UpdateCommentDTO commentDTO) {
-        Comment comment = this.getComment(id);
-        comment.update(commentDTO);
+    public Comment updateComment(UpdateCommentDTO commentDTO) {
+        Comment comment = this.getComment(commentDTO.id());
+        comment.update(commentDTO.content());
         return comment;
     }
 
