@@ -9,7 +9,7 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
-    public User findUserById(Integer id) {
-        return repository.getReferenceById(id);
+    public User getUser(Integer id) {
+        return repository.findByIdAndStatusTrue(id).orElseThrow();
     }
 }
