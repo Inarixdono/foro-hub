@@ -1,6 +1,8 @@
 package com.inarixdono.forohub.domain.course;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -17,7 +19,25 @@ public class CourseService {
     }
 
     @Transactional
-    public Course findCourseById(Integer id) {
-        return repository.getReferenceById(id);
+    public Page<Course> listCourses(Pageable pagination) {
+        return repository.findByStatusTrue(pagination);
+    }
+
+    @Transactional
+    public Course getCourse(Integer id) {
+        return repository.findByIdAndStatusTrue(id).orElseThrow();
+    }
+
+    @Transactional
+    public Course updateCourse(UpdateCourseDTO courseDTO) {
+        Course course = getCourse(courseDTO.id());
+        course.update(courseDTO);
+        return course;
+    }
+
+    @Transactional
+    public void disableCourse(Integer id) {
+        Course course = getCourse(id);
+        course.disable();
     }
 }
