@@ -32,8 +32,8 @@ public class TopicService {
     }
 
     @Transactional
-    public Page<TopicDTO> listTopics(Pageable pagination) {
-        return repository.findByStatusTrue(pagination).map(TopicDTO::new);
+    public Page<Topic> listTopics(Pageable pagination) {
+        return repository.findByStatusTrue(pagination);
     }
 
     @Transactional

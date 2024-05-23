@@ -32,7 +32,7 @@ public class TopicController {
 
     @GetMapping
     public ResponseEntity<Page<TopicDTO>> listTopics(Pageable pagination) {
-        return ResponseEntity.ok(service.listTopics(pagination));
+        return ResponseEntity.ok(service.listTopics(pagination).map(TopicDTO::new));
     }
 
     @GetMapping("/{id}")
