@@ -26,7 +26,7 @@ public class TopicService {
 
     @Transactional
     public Topic createTopic(IncomingTopicDTO topic) {
-        User user = userService.findUserById(topic.userId());
+        User user = userService.getUser(topic.userId());
         Course course = courseService.findCourseById(topic.courseId());
         return repository.save(new Topic(topic, user, course));
     }
