@@ -26,9 +26,10 @@ public class SecurityConfiguration {
         return security.csrf(csrf -> csrf.disable())
             .sessionManagement(sesion -> sesion.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorize -> authorize
-            .requestMatchers(HttpMethod.POST, "/login").permitAll()
+            .requestMatchers(HttpMethod.POST, "/login", "/users").permitAll()
             .anyRequest().authenticated())
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(jwtExceptionHandlingFilter(), securityFilter.getClass())
             .build();
     }
 
@@ -40,5 +41,10 @@ public class SecurityConfiguration {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public JWTExceptionHandlingFilter jwtExceptionHandlingFilter() {
+        return new JWTExceptionHandlingFilter();
     }
 }

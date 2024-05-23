@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.inarixdono.forohub.domain.user.User;
-
 
 @Service
 public class TokenService {
@@ -37,17 +35,14 @@ public class TokenService {
     }
 
     public String getSubject(String token) {
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(key); // validando firma
-            DecodedJWT verifier = JWT.require(algorithm)
-                    .withIssuer("forohub")
-                    .build()
-                    .verify(token);
+        Algorithm algorithm = Algorithm.HMAC256(key);
+        DecodedJWT verifier = JWT.require(algorithm)
+                .withIssuer("forohub")
+                .build()
+                .verify(token);
 
-            return verifier.getSubject();
-        } catch (JWTVerificationException exception) {
-            throw new JWTVerificationException(exception.getMessage());
-        }
+        return verifier.getSubject();
+
     }
 
     private Instant gerenateExpirationTime() {
