@@ -21,6 +21,8 @@ import com.inarixdono.forohub.domain.comment.CommentService;
 import com.inarixdono.forohub.domain.comment.IncommingCommentDTO;
 import com.inarixdono.forohub.domain.comment.UpdateCommentDTO;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
@@ -39,14 +41,14 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<CommentDTO> createComment(@RequestBody IncommingCommentDTO commentDTO, UriComponentsBuilder builder) {
+    public ResponseEntity<CommentDTO> createComment(@RequestBody @Valid IncommingCommentDTO commentDTO, UriComponentsBuilder builder) {
         CommentDTO comment = new CommentDTO(service.createComment(commentDTO));
         URI uri = UriBuilder.buildForId(builder, "/comments/{id}", comment.id().toString());
         return ResponseEntity.created(uri).body(comment);
     }
 
     @PutMapping
-    public ResponseEntity<CommentDTO> updateComment(@RequestBody UpdateCommentDTO commentDTO) {
+    public ResponseEntity<CommentDTO> updateComment(@RequestBody @Valid UpdateCommentDTO commentDTO) {
         return ResponseEntity.ok(new CommentDTO(service.updateComment(commentDTO)));
     }
 
