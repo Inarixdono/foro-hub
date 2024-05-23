@@ -46,4 +46,13 @@ public class Topic {
         this.user = user;
         this.course = course;
     }
+
+    public void update(UpdateTopicDTO topic) {
+        this.subject = topic.subject();
+        this.content = topic.content();
+    }
+
+    public void disable() {
+        this.status = false;
+    }
 }
