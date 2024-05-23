@@ -48,8 +48,12 @@ public class Topic {
     }
 
     public void update(UpdateTopicDTO topic) {
-        this.subject = topic.subject();
-        this.content = topic.content();
+        if (topic.subject() != null) {
+            this.subject = topic.subject();
+        }
+        if (topic.content() != null) {
+            this.content = topic.content();
+        }
     }
 
     public void disable() {
