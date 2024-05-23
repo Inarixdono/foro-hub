@@ -37,7 +37,7 @@ public class TopicService {
     }
 
     @Transactional
-    public Topic geTopic(Integer id) {
+    public Topic getTopic(Integer id) {
         return repository.findByIdAndStatusTrue(id).orElseThrow();
     }
 
