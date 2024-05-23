@@ -45,8 +45,8 @@ public class Comment {
         this.createdAt = LocalDateTime.now();
     }
 
-    public void update(UpdateCommentDTO commentDTO) {
-        this.content = commentDTO.content();
+    public void update(String content) {
+        this.content = content;
     }
 
     public void disable() {
