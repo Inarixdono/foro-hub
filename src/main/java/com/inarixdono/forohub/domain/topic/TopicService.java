@@ -42,17 +42,16 @@ public class TopicService {
     }
 
     @Transactional
-    public Topic updateTopic(Integer id, UpdateTopicDTO updateTopicDTO) {
-        Topic topic = repository.getReferenceById(id);
-        topic.update(updateTopicDTO);
+    public Topic updateTopic(UpdateTopicDTO topicDTO) {
+        Topic topic = repository.getReferenceById(topicDTO.id());
+        topic.update(topicDTO);
         return topic;
     }
 
     @Transactional
-    public Topic deleteTopic(Integer id) {
+    public void deleteTopic(Integer id) {
         Topic topic = repository.getReferenceById(id);
         topic.disable();
-        return topic;
     }
 
 }
